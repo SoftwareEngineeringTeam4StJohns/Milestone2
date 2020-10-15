@@ -3,7 +3,8 @@ package gui;
 public class Driver {
 
 	public static void main(String[] args) throws Exception {
-		OwnerFrame o = new OwnerFrame();
+		ClientFrame client_process = new ClientFrame();
+		//OwnerFrame owner_process = new OwnerFrame();
 		
 	}
 

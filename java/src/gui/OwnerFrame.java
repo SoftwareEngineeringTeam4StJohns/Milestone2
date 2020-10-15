@@ -26,7 +26,6 @@ implements ActionListener{
 		setBounds(500, 90, 700, 500); 
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
         setResizable(false); 
-        
         content = getContentPane();
         content.setLayout(null);
         
