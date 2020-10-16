@@ -120,6 +120,7 @@ public class Option extends JFrame implements ActionListener {
         switch (e.getActionCommand()) {
             case "Client":
                 swap.next(hold);
+                
                     break;
             case "Owner":
                 swap.next(hold);
