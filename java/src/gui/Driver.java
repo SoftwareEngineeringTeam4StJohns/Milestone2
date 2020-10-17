@@ -1,13 +1,17 @@
 package gui;
 
-public class Driver {
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
+public class Driver {
+	
 	public static void main(String[] args) throws Exception {
 		
-		new Option();
-		
-		
+		GUI gui = new GUI();
+		System.out.println("Program has exited...");
 		
 	}
+	
 
 }

@@ -4,12 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
-public class Option extends JFrame implements ActionListener {
+public class GUI extends JFrame implements ActionListener {
 
-	JPanel firstPanel, secondPanel, thirdPanel;
-	private JButton client, owner, submit1, submit2, help, back;
+	private JPanel firstPanel, secondPanel, thirdPanel;
+	private JButton client, owner, clientSubmit, ownerSubmit, help, back;
 	// Owners button
 	private JLabel ownerID, vehModel, vehColor, vehLicense, approxRes, approxDaysTitle, approxMonsTitle, TEST2;
 	// Clients button
@@ -20,9 +30,13 @@ public class Option extends JFrame implements ActionListener {
 	private JComboBox vehColorBox, approxDays, approxMons, approxJobHours, approxJobMin, deadlineHours, deadlineMin;
 	private int xPosAlignLeft = 100;
 	private int xPosAlignRight = 270;
-	CardLayout swap;
+	private CardLayout swap;
 	private Container content;
 	private String[] colors= {"White", "Black", "Grey", "Silver", "Green", "Red", "Blue", "Yellow", "Purple", "Pink", "Orange", "Other"};
+	private ArrayList<String[]> ownerEntries = new ArrayList<>();
+	private ArrayList<String[]> clientEntries = new ArrayList<>();
+	
+	
 	// Opening frame to the GUI
 	public void panel1() {
 		firstPanel = new JPanel();
@@ -131,10 +145,14 @@ public class Option extends JFrame implements ActionListener {
 		secondPanel.add(deadlineHours);
 		secondPanel.add(deadlineMin);
 
-		submit1 = new JButton("Submit");
+		clientSubmit = new JButton("Submit");
 
-		submit1.addActionListener(new ActionListener() {
+		clientSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+				String[] tempArr = {clientIDText.getText(), jobInfoText.getText(), (String)approxJobHours.getSelectedItem(), (String)approxJobMin.getSelectedItem(),
+									(String)deadlineHours.getSelectedItem(), (String)deadlineMin.getSelectedItem(), timeStamp};
+				clientEntries.add(tempArr);
 				System.out.println("Success!");
 				System.out.println("Client ID:");
 				System.out.println(clientIDText.getText() + '\n');
@@ -151,17 +169,20 @@ public class Option extends JFrame implements ActionListener {
 			}
 		});
 
-		submit1.setFont(new Font("Arial", Font.PLAIN, 20));
-		submit1.setLocation(xPosAlignLeft, 300);
-		submit1.setSize(100, 20);
-		secondPanel.add(submit1);
+		clientSubmit.setFont(new Font("Arial", Font.PLAIN, 20));
+		clientSubmit.setLocation(xPosAlignLeft, 300);
+		clientSubmit.setSize(100, 20);
+		secondPanel.add(clientSubmit);
 
 		createBackButton();
 		back.setLocation(250, 300);
 		secondPanel.add(back);
 	}
+	
 
-	// Owner submit information
+	/*
+	 * All paneling belonging to the owner 
+	 */
 	public void ownerPanel() {
 		thirdPanel = new JPanel();
 		thirdPanel.setLayout(null);
@@ -245,11 +266,15 @@ public class Option extends JFrame implements ActionListener {
         thirdPanel.add(approxMons);
 
 
-		submit2 = new JButton("Submit");
+		ownerSubmit = new JButton("Submit");
 
-		submit2.addActionListener(new ActionListener() {
+		ownerSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				
+				String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+				String[] tempArr = {ownerIDText.getText(), vehModelText.getText(), (String)vehColorBox.getSelectedItem(),
+									vehLicenseText.getText(), (String)approxDays.getSelectedItem(), (String)approxMons.getSelectedItem(), timeStamp};
+				//adding the temporary data array to the total client entries for file writing at later point 
+				ownerEntries.add(tempArr);
 				System.out.println("Success!");
 				System.out.println("Owner ID: ");
 				System.out.println(ownerIDText.getText() + '\n');
@@ -267,10 +292,10 @@ public class Option extends JFrame implements ActionListener {
 			}
 		});
 
-		submit2.setFont(new Font("Arial", Font.PLAIN, 20));
-		submit2.setLocation(xPosAlignLeft, 400);
-		submit2.setSize(100, 20);
-		thirdPanel.add(submit2);
+		ownerSubmit.setFont(new Font("Arial", Font.PLAIN, 20));
+		ownerSubmit.setLocation(xPosAlignLeft, 400);
+		ownerSubmit.setSize(100, 20);
+		thirdPanel.add(ownerSubmit);
 
 		createBackButton();
 		thirdPanel.add(back);
@@ -310,17 +335,23 @@ public class Option extends JFrame implements ActionListener {
 		client.setActionCommand("Client");
 		owner.addActionListener(this);
 		owner.setActionCommand("Owner");
-		submit1.addActionListener(this);
-		submit1.setActionCommand("Submit");
-		submit2.addActionListener(this);
-		submit2.setActionCommand("Submit");
+		clientSubmit.addActionListener(this);
+		clientSubmit.setActionCommand("Submit");
+		ownerSubmit.addActionListener(this);
+		ownerSubmit.setActionCommand("Submit");
 	}
-
-	public Option() {
+	/*
+	 * The constructor of the main GUI panel. 
+	 */
+	public GUI() {
 		this.setTitle("Milestone 2");
 		this.setLocation(610, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		this.addWindowListener(new WindowAdapter() {
+		    public void windowClosing(WindowEvent e) {
+		        generateLogs();
+		    }
+		});
 		panel1();
 		clientPanel();
 		ownerPanel();
@@ -332,16 +363,15 @@ public class Option extends JFrame implements ActionListener {
 		content.setLayout(swap);
 
 		seeAction();
-
+		
 		this.setSize(700, 500);
 		content.add(firstPanel);
 		content.add(secondPanel);
 		content.add(thirdPanel);
 		this.setVisible(true);
 	}
-
-	@Override
 	// GUI navigation
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "Client":
@@ -358,9 +388,13 @@ public class Option extends JFrame implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Handles clearing information after each entry
+	 */
 	private void clearInfo() {
 		//client info clear
 		clientIDText.setText(null);
+		jobInfoText.setText(null);
 		approxJobHours.setSelectedIndex(0);
 		approxJobMin.setSelectedIndex(0);
 		deadlineHours.setSelectedIndex(0);
@@ -382,6 +416,9 @@ public class Option extends JFrame implements ActionListener {
 		}
 	}
 
+	/*
+	 * Functions to automate the generation of integer dependent combo box values. 
+	 */
 	private void generateComboBoxVals(JComboBox approxDays, JComboBox approxMons) {
 		for (int i = 0; i <= 30; i++) {
 			approxDays.addItem(Integer.toString(i));
@@ -403,4 +440,69 @@ public class Option extends JFrame implements ActionListener {
 			deadlineMin.addItem(Integer.toString(i));
 		}
 	}
+	
+	
+	public void generateLogs() {
+		//log generation for clients
+		try {
+			
+			FileWriter csvWriter = new FileWriter("clientLog.csv");
+			csvWriter.append("Client id");
+			csvWriter.append(",");
+			csvWriter.append("Job Info.");
+			csvWriter.append(",");
+			csvWriter.append("Approx. Job Hours");
+			csvWriter.append(",");
+			csvWriter.append("Approx. Job Min.");
+			csvWriter.append(",");
+			csvWriter.append("Deadline Hours");
+			csvWriter.append(",");
+			csvWriter.append("Deadline Min.");
+			csvWriter.append(",");
+			csvWriter.append("Timestamp");
+			csvWriter.append("\n");
+			
+			for(String[] entry: clientEntries) {
+				System.out.println(String.join(",", entry));
+				csvWriter.append(String.join(",", entry));
+				csvWriter.append("\n");
+			}
+			csvWriter.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//log generation for owners
+		try {
+			
+			FileWriter csvWriter = new FileWriter("ownerLog.csv");
+			csvWriter.append("Owner id");
+			csvWriter.append(",");
+			csvWriter.append("Vehicle Model");
+			csvWriter.append(",");
+			csvWriter.append("Vehicle Color");
+			csvWriter.append(",");
+			csvWriter.append("Vehicle Plate Number");
+			csvWriter.append(",");
+			csvWriter.append("Approx. Residency Days");
+			csvWriter.append(",");
+			csvWriter.append("Approx Residency Months");
+			csvWriter.append(",");
+			csvWriter.append("Timestamp");
+			csvWriter.append("\n");
+			
+			for(String[] entry: ownerEntries) {
+				System.out.println(String.join(",", entry));
+				csvWriter.append(String.join(",", entry));
+				csvWriter.append("\n");
+			}
+			csvWriter.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 }
