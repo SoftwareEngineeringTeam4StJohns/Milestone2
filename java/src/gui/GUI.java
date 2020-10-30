@@ -30,21 +30,26 @@ public class GUI extends JFrame implements ActionListener {
         helpButton = new JButton();
         focusedPanel = new JPanel();
         homePanel = new JPanel();
-        jLabel16 = new JLabel();
-        jLabel17 = new JLabel();
-        jLabel15 = new JLabel();
-        jLabel18 = new JLabel();
-        jLabel19 = new JLabel();
-        jLabel20 = new JLabel();
+        legendLabel = new JLabel();
+        homeLegLabel = new JLabel();
+        clientLegLabel = new JLabel();
+        ownerLegLabel = new JLabel();
+        helpLegLabel = new JLabel();
+        brandName = new JLabel();
+        brandLogo = new JLabel();
+        introSynopsis = new JLabel();
         Home1 = new JButton();
         Client1 = new JButton();
         Owner1 = new JButton();
         Help = new JButton();
+        jSeparator1 = new JSeparator();
+        brandLogo = new JLabel();
+        jSeparator2 = new JSeparator();
         clientPanel = new JPanel();
         clientIDLabel = new JLabel();
         clientID = new JTextField();
         jobInfoLabel = new JLabel();
-        jobInfo = new java.awt.TextArea();
+        jobInfo = new TextArea();
         approxTimeLabel = new JLabel();
         hourLabel = new JLabel();
         minuteLabel = new JLabel();
@@ -74,7 +79,7 @@ public class GUI extends JFrame implements ActionListener {
 
         root.setBackground(new java.awt.Color(34, 40, 44));
         root.setLayout(new java.awt.BorderLayout());
-
+        
         sideNavigation.setBackground(new java.awt.Color(21, 25, 28));
         sideNavigation.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sideNavigation.setPreferredSize(new java.awt.Dimension(80, 0));
@@ -133,73 +138,77 @@ public class GUI extends JFrame implements ActionListener {
         sideNavigation.add(helpButton);
 
         root.add(sideNavigation, java.awt.BorderLayout.LINE_START);
-
+        
         focusedPanel.setBackground(new java.awt.Color(34, 40, 44));
         focusedPanel.setPreferredSize(new java.awt.Dimension(1153, 582));
         focusedPanel.setLayout(new java.awt.CardLayout());
         
-        
-        
         homePanel.setBackground(new java.awt.Color(34, 40, 44));
+        homePanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel16.setText("Heres the Icon Key Code:");
+        legendLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        legendLabel.setForeground(new java.awt.Color(204, 204, 204));
+        legendLabel.setText("Legend:");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel17.setText("Welcome to Milestone 2");
+        brandName.setFont(new java.awt.Font("Sitka Banner", 2, 48)); // NOI18N
+        brandName.setForeground(new java.awt.Color(204, 204, 204));
+        brandName.setText("Icarus Vehicle Cloud Services");
 
-        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel15.setText("Help");
-
-        jLabel18.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel18.setText("Vehicle owner");
-
-        jLabel19.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel19.setText("Home(this screen)");
-
-        jLabel20.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel20.setText("Client");
-
+        homeLegLabel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        homeLegLabel.setForeground(new java.awt.Color(204, 204, 204));
+        homeLegLabel.setLabelFor(Home1);
+        homeLegLabel.setText("Home (current)");
+        
         Home1.setBackground(new java.awt.Color(34, 40, 44));
         Home1.setForeground(new java.awt.Color(250, 0, 0));
-        Home1.setIcon(new ImageIcon(getClass().getResource("/icons/icons8_home_100px.png"))); // NOI18N
+        Home1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_home_100px.png"))); // NOI18N
         Home1.setPreferredSize(new java.awt.Dimension(60, 60));
         Home1.setActionCommand("HOME");
-        Home1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        Home1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Home1ActionPerformed(evt);
             }
         });
         Home1.addActionListener(this);
 
+        clientLegLabel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        clientLegLabel.setForeground(new java.awt.Color(204, 204, 204));
+        clientLegLabel.setText("Client");
+        
         Client1.setBackground(new java.awt.Color(34, 40, 44));
         Client1.setForeground(new java.awt.Color(250, 0, 0));
-        Client1.setIcon(new ImageIcon(getClass().getResource("/icons/icons8_person_70px_1.png"))); // NOI18N
+        Client1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_person_70px_1.png"))); // NOI18N
         Client1.setPreferredSize(new java.awt.Dimension(60, 60));
-        Client1.setVerticalTextPosition(SwingConstants.BOTTOM);
+        Client1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Client1.setActionCommand("CLIENT");
-        Client1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        Client1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Client1ActionPerformed(evt);
             }
         });
         Client1.addActionListener(this);
 
+        ownerLegLabel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        ownerLegLabel.setForeground(new java.awt.Color(204, 204, 204));
+        ownerLegLabel.setText("Vehicle owner");
+
         Owner1.setBackground(new java.awt.Color(34, 40, 44));
         Owner1.setForeground(new java.awt.Color(250, 0, 0));
-        Owner1.setIcon(new ImageIcon(getClass().getResource("/icons/icons8_car_70px.png"))); // NOI18N
+        Owner1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_car_70px.png"))); // NOI18N
         Owner1.setPreferredSize(new java.awt.Dimension(60, 60));
-        Owner1.setVerticalTextPosition(SwingConstants.BOTTOM);
+        Owner1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Owner1.setActionCommand("OWNER");
-        Owner1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        Owner1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Owner1ActionPerformed(evt);
             }
         });
         Owner1.addActionListener(this);
-
+        
+        helpLegLabel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        helpLegLabel.setForeground(new java.awt.Color(204, 204, 204));
+        helpLegLabel.setText("Help");
+        
         Help.setBackground(new java.awt.Color(34, 40, 44));
         Help.setForeground(new java.awt.Color(250, 0, 0));
         Help.setIcon(new ImageIcon(getClass().getResource("/icons/icons8_help_70px.png"))); // NOI18N
@@ -211,68 +220,92 @@ public class GUI extends JFrame implements ActionListener {
         });
         Help.addActionListener(this);
         
-        GroupLayout homePanelLayout = new GroupLayout(homePanel);
+        
+        brandLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cloud.png"))); // NOI18N
+        brandLogo.setDoubleBuffered(true);
+        
+        introSynopsis.setForeground(new java.awt.Color(204, 204, 204));
+        introSynopsis.setText("<html>\n<h4>\nWelcome to our vehicle cloud service program!  \n</h4>\n<span>For all vehicle owners seeking to enroll in our service, please see the Vehicle Owner Page.</span>\n<br>\n<br>\n<span>For all clients interested in contracting a job, please see the Client page. </span>\n<br>\n<br>\n<span>We're pleased to be working in the clouds...</span>\n</html>\n");
+        introSynopsis.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        
+        
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
-            homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(jLabel17))
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(jLabel16))
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addGroup(homePanelLayout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel20)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel18))
-                            .addGroup(homePanelLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(Home1, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Client1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Owner1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(homePanelLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel15))
-                            .addGroup(homePanelLayout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Help, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(490, Short.MAX_VALUE))
-        );
-        homePanelLayout.setVerticalGroup(
-            homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(jLabel16, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel15))
-                .addGap(39, 39, 39)
-                .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGroup(homePanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(Owner1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Client1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Help, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addComponent(Home1, GroupLayout.PREFERRED_SIZE, 69, Short.MAX_VALUE)
-                        .addGap(131, 131, 131))))
-        );
+                homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(homePanelLayout.createSequentialGroup()
+                    .addGap(140, 140, 140)
+                    .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(homePanelLayout.createSequentialGroup()
+                            .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(homePanelLayout.createSequentialGroup()
+                                    .addComponent(Home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(Client1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(homePanelLayout.createSequentialGroup()
+                                            .addComponent(ownerLegLabel)
+                                            .addGap(41, 41, 41)
+                                            .addComponent(helpLegLabel))
+                                        .addGroup(homePanelLayout.createSequentialGroup()
+                                            .addComponent(Owner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(Help, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(homePanelLayout.createSequentialGroup()
+                                    .addComponent(homeLegLabel)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(clientLegLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(legendLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(16, 16, 16))
+                        .addGroup(homePanelLayout.createSequentialGroup()
+                            .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(homePanelLayout.createSequentialGroup()
+                                    .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(brandName))
+                                    .addGap(112, 112, 112))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanelLayout.createSequentialGroup()
+                                    .addComponent(introSynopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(brandLogo)))
+                    .addGap(0, 108, Short.MAX_VALUE))
+            );
+            homePanelLayout.setVerticalGroup(
+                homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(homePanelLayout.createSequentialGroup()
+                    .addGap(109, 109, 109)
+                    .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(homePanelLayout.createSequentialGroup()
+                            .addComponent(brandLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                            .addComponent(legendLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(4, 4, 4)
+                            .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(clientLegLabel)
+                                .addComponent(homeLegLabel)
+                                .addComponent(ownerLegLabel)
+                                .addComponent(helpLegLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Home1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Client1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Owner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Help, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(43, 43, 43))
+                        .addGroup(homePanelLayout.createSequentialGroup()
+                            .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(homePanelLayout.createSequentialGroup()
+                                    .addComponent(brandName, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(66, 66, 66)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(introSynopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            );
 
         focusedPanel.add(homePanel, "HOME");
       
@@ -548,7 +581,7 @@ public class GUI extends JFrame implements ActionListener {
         getContentPane().add(root, java.awt.BorderLayout.LINE_START);
 
         pack();
-    }// </editor-fold>                        
+    }                   
 
 	
 	private void helpButtonActionPerformed(ActionEvent evt) {                                           
@@ -647,7 +680,6 @@ public class GUI extends JFrame implements ActionListener {
 		        generateLogs();
 		    }
 		});
-		this.setVisible(true);
 	}
 	
 	
@@ -710,7 +742,7 @@ public class GUI extends JFrame implements ActionListener {
 		String timeStamp = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(new Date());
 		if (clientEntries.isEmpty() != true) {		
 			try {
-				FileWriter csvWriter = new FileWriter("logs/CLIENT_LOGS_"+timeStamp+".csv");
+				FileWriter csvWriter = new FileWriter("../../logs/CLIENT_LOGS_"+timeStamp+".csv");
 				csvWriter.append("Client id");
 				csvWriter.append(",");
 				csvWriter.append("Job Info.");
@@ -740,7 +772,7 @@ public class GUI extends JFrame implements ActionListener {
 		//owner logs
 		if (ownerEntries.isEmpty() != true) {
 			try {		
-				FileWriter csvWriter = new FileWriter("logs/OWNER_LOGS_"+timeStamp+".csv");
+				FileWriter csvWriter = new FileWriter("../../logs/OWNER_LOGS_"+timeStamp+".csv");
 				csvWriter.append("Owner id");
 				csvWriter.append(",");
 				csvWriter.append("Vehicle Model");
@@ -785,6 +817,7 @@ public class GUI extends JFrame implements ActionListener {
     private JLabel approxTimeLabel;
     private JTextField clientID;
     private JLabel clientIDLabel;
+    private JLabel clientLegLabel;
     private JButton clientNavButton;
     private JPanel clientPanel;
     private JButton clientSubmit;
@@ -792,21 +825,24 @@ public class GUI extends JFrame implements ActionListener {
     private JLabel deadlineLabel;
     private JComboBox<String> deadlineMin;
     private JPanel focusedPanel;
+    private JLabel homeLegLabel;
+    private JLabel helpLegLabel;
     private JButton helpButton;
     private JButton homeNavButton;
     private JPanel homePanel;
     private JLabel hourLabel;
-    private JLabel jLabel15;
-    private JLabel jLabel16;
-    private JLabel jLabel17;
-    private JLabel jLabel18;
-    private JLabel jLabel19;
-    private JLabel jLabel20;
+    private JLabel legendLabel;
+    private JLabel brandLogo;
+    private JLabel brandName;
+    private JLabel introSynopsis;
+    private JSeparator jSeparator1;
+    private JSeparator jSeparator2;
     private TextArea jobInfo;
     private JLabel jobInfoLabel;
     private JLabel minuteLabel;
     private JTextField ownerID;
     private JLabel ownerIDLabel;
+    private JLabel ownerLegLabel;
     private JButton ownerNavButton;
     private JPanel ownerPanel;
     private JButton ownerSubmit;
@@ -818,6 +854,8 @@ public class GUI extends JFrame implements ActionListener {
     private JLabel vehModelLabel;
     private JTextField vehPlate;
     private JLabel vehPlateLabel;
+    
+    
     private CardLayout panelSwapper;
     private String[] colors= {"White", "Black", "Grey", "Silver", "Green", "Red", "Blue", "Yellow", "Purple", "Pink", "Orange", "Other"};
 	private ArrayList<String[]> ownerEntries = new ArrayList<>();
